@@ -7,28 +7,48 @@ block content
       div.control-group
         label.control-label(for='username') 用户名
         div.controls
-          input#username.input-xlarge(type='text', name='username')
-          p.help-block 您的账户名称、用于登陆和显示。
+          input#username.input-xlarge(type='text', name='username', placeholder='您的账户名称、用于登陆和显示。')
+          div#alertdiv1.alert.in(style='display:none')
+            button.close(type='button', data-dismiss='alert') x
+            :markdown
+              **提醒！**请输入用户名
+
       div.control-group
         label.control-label(for='password') 密码
         div.controls
           input#password.input-xlarge(type='password', name='password')
+          div#alertdiv2.alert.in(style='display:none')
+            button.close(type='button', data-dismiss='alert') x
+            :markdown
+              **提醒！**请输入密码
+
       div.control-group
         label.control-label(for='password-repeat') 重复输入密码
         div.controls
           input#password-repeat.input-xlarge(type='password', name='password-repeat')
-      div.control-group
-        div.controls
-          div.alert
+          div#alertdiv3.alert.in(style='display:none')
             button.close(type='button',data-dismiss='alert') x
-            strong Warning!
-              |Best check yo self, you're not looking too good.
+            :markdown
+              **提醒！**两次输入密码不一致
+
       div.form-actions
         button#submitbtn.btn.btn-primary(type='button', onclick='doReg();') 注册
   script
     function doReg(){
+      if($('#username').val()==''){
+        $("#alertdiv1").show();
+        return;
+      }else{
+        $("#alertdiv1").hide();
+      }
+      if($('#password').val()==''){
+        $("#alertdiv2").show();
+        return;
+      }else{
+        $("#alertdiv2").hide();
+      }
       if($('#password').val()!=$('#password-repeat').val()){
-        $(".alert").alert();
+        $("#alertdiv3").show();
         return;
       }
       regFrom.submit();

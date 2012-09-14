@@ -18,6 +18,8 @@ exports.reg = function(req, res){
 };
 
 exports.doReg = function(req, res){
+  console.log(req.body);
+  res.redirect('/reg');
 };
 
 exports.login = function(req, res){

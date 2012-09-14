@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form.form-horizontal(method='post')
+  form#regFrom.form-horizontal(method='post')
     fieldset
       legend 用户注册
       div.control-group
@@ -10,12 +10,26 @@ block content
           input#username.input-xlarge(type='text', name='username')
           p.help-block 您的账户名称、用于登陆和显示。
       div.control-group
-        label.control-label(for='password') 口令
+        label.control-label(for='password') 密码
         div.controls
           input#password.input-xlarge(type='password', name='password')
       div.control-group
-        label.control-label(for='password-repeat') 重复输入口令
+        label.control-label(for='password-repeat') 重复输入密码
         div.controls
           input#password-repeat.input-xlarge(type='password', name='password-repeat')
+      div.control-group
+        div.controls
+          div.alert
+            button.close(type='button',data-dismiss='alert') x
+            strong Warning!
+              |Best check yo self, you're not looking too good.
       div.form-actions
-        button.btn.btn-primary(type='submit') 注册
+        button#submitbtn.btn.btn-primary(type='button', onclick='doReg();') 注册
+  script
+    function doReg(){
+      if($('#password').val()!=$('#password-repeat').val()){
+        $(".alert").alert();
+        return;
+      }
+      regFrom.submit();
+    }

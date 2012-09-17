@@ -13,6 +13,7 @@ var app = express();
 
 var MongoStore = require('connect-mongo')(express);
 var settings = require('./settings');
+var flash = require('connect-flash');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -23,6 +24,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
+  app.use(flash());
   app.use(express.session({
     secret: settings.cookieSecret,
     store: new MongoStore({
@@ -33,11 +35,18 @@ app.configure(function(){
   app.use(function(req, res, next){
     res.locals.user = req.session.user;
     console.log('error==='+req.session.error);
-    res.locals.error = req.session.error;
-    console.log('success==='+req.session.success);
-    res.locals.success = req.session.success;
-    next();
+    var err = req.flash('error');
+    if(err.length)
+      res.locals.error = err;
+    else
+      res.locals.error = null;
+    var succ = req.flash('success');
+    if(succ.length)
+      res.locals.success = succ;
+    else
+      res.locals.success = null;
     console.log(res.locals.user+"/"+res.locals.error+"/"+res.locals.success);
+    next();
   });
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));

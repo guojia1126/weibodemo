@@ -27,6 +27,7 @@ User.prototype.save = function save(callback) {
       // 写入 user 文档
       collection.insert(user, {safe: true}, function(err, user) {
         mongodb.close();
+        console.log('user saved');
         callback(err, user);
       });
     });
@@ -46,6 +47,7 @@ User.get = function get(username, callback) {
       }
       // 查找name 属性为username 的文档
       collection.findOne({name: username}, function (err, doc) {
+        mongodb.close();
         if (doc) {
           //封装文档为 User 对象
           var user = new User(doc);

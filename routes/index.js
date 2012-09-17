@@ -35,14 +35,21 @@ exports.doReg = function(req, res){
     if(user)
       err = 'Username already exists.';
     if(err){
-      // req.flash('error', err);
-      req.session.error = err;
+      req.flash('error', err);
+      //req.session.error = err;
       return res.redirect('/reg');
     }
-    req.session.user = newUser;
-    //req.flash('success', '注册成功');
-    req.session.success = '注册成功';
-    res.redirect('/');
+    //如果不存在则新增用户
+    newUser.save(function(err){
+      if(err) {
+        req.flash('error', err);
+        return res.redirect('/reg');
+      }
+      req.session.user = newUser;
+      req.flash('success', '注册成功');
+      //req.session.success = '注册成功';
+      res.redirect('/');
+    });
   });
 };
 

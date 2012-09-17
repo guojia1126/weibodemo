@@ -30,6 +30,15 @@ app.configure(function(){
     })
   }));
   //app.use(express.router(routes));
+  app.use(function(req, res, next){
+    res.locals.user = req.session.user;
+    console.log('error==='+req.session.error);
+    res.locals.error = req.session.error;
+    console.log('success==='+req.session.success);
+    res.locals.success = req.session.success;
+    next();
+    console.log(res.locals.user+"/"+res.locals.error+"/"+res.locals.success);
+  });
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -37,6 +46,8 @@ app.configure(function(){
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
+
+
 
 /*app.dynamicHelpers({
   user: function(req, res) {

@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var User = require('../models/user.js');
 
 exports.index = function(req, res){
-  res.render('index', { title: '首页' });
+  res.render('index', { title: '首页'});
 };
 
 exports.user = function(req, res){
@@ -36,11 +36,13 @@ exports.doReg = function(req, res){
       err = 'Username already exists.';
     if(err){
       // req.flash('error', err);
+      req.session.error = err;
       return res.redirect('/reg');
     }
-    req.session.user = newUser();
-    req.flash('success', '注册成功');
-    req.redirect('/');
+    req.session.user = newUser;
+    //req.flash('success', '注册成功');
+    req.session.success = '注册成功';
+    res.redirect('/');
   });
 };
 

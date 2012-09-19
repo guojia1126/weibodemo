@@ -5,7 +5,6 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
@@ -80,11 +79,17 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/u/:user', routes.user);
+app.post('/post', routes.checkLogin);
 app.post('/post', routes.post);
+app.get('/reg', routes.checkNotLogin);
 app.get('/reg', routes.reg);
+app.post('/reg', routes.checkNotLogin);
 app.post('/reg', routes.doReg);
+app.get('/login', routes.checkNotLogin);
 app.get('/login', routes.login);
+app.post('/login', routes.checkNotLogin);
 app.post('/login', routes.doLogin);
+app.get('/logout', routes.checkLogin);
 app.get('/logout', routes.logout);
 
 http.createServer(app).listen(app.get('port'), function(){

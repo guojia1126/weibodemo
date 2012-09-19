@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "express": "3.0.0rc4",
-    "jade": "*",
-    "connect-mongo": ">= 0.1.7",
-    "mongodb": ">= 0.9.9",
-    "markdown-js": "*",
-    "connect-flash": "*"
+    "jade": ">= 0.27.2",
+    "connect-mongo": ">= 0.2.0",
+    "mongodb": ">= 1.1.7",
+    "markdown-js": ">= 0.0.3",
+    "connect-flash": ">= 0.1.0"
   }
 }

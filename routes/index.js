@@ -4,6 +4,7 @@
  */
 var myUtils = require('../myutils');
 var User = require('../models/user.js');
+var Post = require('../models/post.js')
 
 exports.index = function(req, res){
   Post.get(null, function(err,posts){

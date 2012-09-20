@@ -45,7 +45,7 @@ exports.post = function(req, res){
       req.flash('error', err);
       return res.redirect('/');
     }
-    req.flash('success', '发票成功');
+    req.flash('success', '发表成功');
     res.redirect('/u/' + currentUser.name);
   });
 };

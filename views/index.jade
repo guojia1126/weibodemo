@@ -1,16 +1,16 @@
 extends layout
 
 block content
-- if(!user)
+  - if(!user)
     div.hero-unit
       h1 欢迎来到 WeiboDemo
       p WeiboDemo 是一个基于 Node.js 的微博系统
       p
         a.btn.btn-primary.btn-large(href='/login') 登录
         a.btn.btn-large(href='/reg') 立即注册
-- else
-    content say
-  content posts
+  - else
+    include say
+  include posts
   //- div.row
   //-   div.span4
   //-     h2 老王 说

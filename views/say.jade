@@ -1,8 +1,5 @@
-extends index
-
-block say
-  form.well.form-inline.center(method='post', action='/post', style='text-align:center;')
-    input.span8(type='text', name='post')
-    button.btn.btn-success(type='submit')
-      i.icon-commect.icon-white
-      | 发言
+form.well.form-inline.center(method='post', action='/post', style='text-align:center;')
+  input.span8(type='text', name='post')
+  button.btn.btn-success(type='submit')
+    i.icon-commect.icon-white
+    | 发言

@@ -2,5 +2,5 @@ extends layout
 
 block content
   - if(user)
-      partial('say')
-    partial('posts')
+      include say
+    include posts

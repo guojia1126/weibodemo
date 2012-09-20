@@ -1,9 +1,6 @@
-extends index
-
-block posts
-- post.forEach(function(post, index){
+- posts.forEach(function(post, index){
 - if(index % 3 ==0){
-    div.row
+  | <div class="row">
 - } 
   div.span4
     h2
@@ -12,9 +9,9 @@ block posts
     p
       small #{post.post}
 - if(index % 3 == 2) {
-  
+  | </div>
 - }
 - })
 - if(posts.length % 3 != 0){
-  
+  | </div>
 - }
